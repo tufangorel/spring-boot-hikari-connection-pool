@@ -26,6 +26,8 @@ $ mvn clean install <br/>
 2021-10-10 16:48:47,364 INFO  [main] com.zaxxer.hikari.pool.HikariPool: SpringBootJPAHikariCP - Added connection conn1: url=jdbc:h2:file:~/cust user=SA <br/>
 2021-10-10 16:48:47,367 INFO  [main] com.zaxxer.hikari.HikariDataSource: SpringBootJPAHikariCP - Start completed. <br/>
 
+![Hikari_Connection_Pool](docs/hikari_connection_pool_spring_boot.png) <br/>
+
 ### Tech Stack
 Java 11 <br/>
 H2 Database Engine <br/>
