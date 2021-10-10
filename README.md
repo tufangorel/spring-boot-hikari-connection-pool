@@ -20,7 +20,6 @@ $ mvn clean install <br/>
 2021-10-10 16:48:42,822 DEBUG [main] com.zaxxer.hikari.HikariConfig: connectionTimeout...............20000 <br/>
 2021-10-10 16:48:42,827 DEBUG [main] com.zaxxer.hikari.HikariConfig: dataSourceProperties............{password=<masked>} <br/>
 2021-10-10 16:48:42,827 DEBUG [main] com.zaxxer.hikari.HikariConfig: driverClassName................."org.h2.Driver" <br/>
-2021-10-10 16:48:42,831 DEBUG [main] com.zaxxer.hikari.HikariConfig: jdbcUrl.........................jdbc:h2:file:~/cust;DB_CLOSE_ON_EXIT=TRUE;AUTO_SERVER=TRUE <br/>
 2021-10-10 16:48:42,835 DEBUG [main] com.zaxxer.hikari.HikariConfig: poolName........................"SpringBootJPAHikariCP" <br/>
 2021-10-10 16:48:42,841 INFO  [main] com.zaxxer.hikari.HikariDataSource: SpringBootJPAHikariCP - Starting... <br/>
 2021-10-10 16:48:47,364 INFO  [main] com.zaxxer.hikari.pool.HikariPool: SpringBootJPAHikariCP - Added connection conn1: url=jdbc:h2:file:~/cust user=SA <br/>
