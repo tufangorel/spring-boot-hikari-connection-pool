@@ -24,7 +24,7 @@ $ mvn clean install <br/>
 2021-10-10 16:48:42,841 INFO  [main] com.zaxxer.hikari.HikariDataSource: SpringBootJPAHikariCP - Starting... <br/>
 2021-10-10 16:48:47,364 INFO  [main] com.zaxxer.hikari.pool.HikariPool: SpringBootJPAHikariCP - Added connection conn1: url=jdbc:h2:file:~/cust user=SA <br/>
 2021-10-10 16:48:47,367 INFO  [main] com.zaxxer.hikari.HikariDataSource: SpringBootJPAHikariCP - Start completed. <br/>
-
+<br/><br/>
 ![Hikari_Connection_Pool](doc/hikari_connection_pool_spring_boot.png) <br/>
 
 ### Tech Stack
