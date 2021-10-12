@@ -3,8 +3,7 @@
 Purpose : Use hikari connection pool for db connection object re-use and caching. <br/>
 Reason : Improve application run-time performance.  <br/>
 
-<br/>
-### Local run steps
+### Local run steps <br/>
 1- Start Spring Boot API by running main method containing class CustomerInfoApplication.java in your IDE. <br/>
 2- Alternatively you can start your Docker container by following the commands below. <br/>
 NOT : Execute maven command from where the pom.xml is located in the project directory to create Spring Boot executable jar. <br/>
