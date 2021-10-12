@@ -55,8 +55,8 @@ NOT : Tested on Windows 10 with Docker Desktop Engine Version : 20.10.8 <br/>
 $ docker system prune -a --volumes <br/>
 $ docker build . --tag demo  <br/>
 $ docker images <br/>
-$ REPOSITORY   TAG       IMAGE ID       CREATED         SIZE <br/>
-$ demo         latest    9d4a0ec3294e   6 minutes ago   288MB <br/>
+  REPOSITORY   TAG       IMAGE ID       CREATED         SIZE <br/>
+  demo         latest    9d4a0ec3294e   6 minutes ago   288MB <br/>
 $ docker run -p 8080:8080 -e "SPRING_PROFILES_ACTIVE=dev" demo:latest <br/>
 </pre>
 
