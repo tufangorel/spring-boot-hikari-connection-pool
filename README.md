@@ -1,7 +1,7 @@
 ## spring-boot-hikari-connection-pool
 
 Purpose : Use hikari connection pool for db connection object re-use and caching. <br/>
-Reason : Improve application run-time performance. <br/>
+Reason : Improve application run-time performance.  <br/>
 
 <br/>
 ### Local run steps <br/>
