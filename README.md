@@ -8,7 +8,7 @@ Reason : Improve application run-time performance.  <br/>
 2- Alternatively you can start your Docker container by following the commands below. <br/>
 NOT : Execute maven command from where the pom.xml is located in the project directory to create Spring Boot executable jar. <br/>
 <pre> 
-$ mvn clean install <br/>
+$ mvn clean install -U -X <br/>
 </pre>
 
 2021-10-12 23:12:25,670 DEBUG [main] com.zaxxer.hikari.HikariConfig: SpringBootJPAHikariCP - configuration: <br/>
