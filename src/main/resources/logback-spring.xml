@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
+    <property resource="application.properties" />
 
     <appender name="ConsoleAppender"
               class="ch.qos.logback.core.ConsoleAppender">
@@ -15,8 +16,23 @@
         <appender-ref ref="ConsoleAppender" />
     </root>
 
-    <logger name="com.zaxxer.hikari" level="debug" additivity="false">
-        <appender-ref ref="ConsoleAppender" />
+    <appender name="HIKARI" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${server.tomcat.basedir}/hikari/hikari.log</file>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <Pattern>[%d{dd-MMM-yyyy HH:mm:ss.SSS}] [%logger] [%-5level] - %msg%n</Pattern>
+        </encoder>
+
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${server.tomcat.basedir}/hikari/hikari_%d{yyyy-MM-dd}.log
+            </fileNamePattern>
+            <maxHistory>20</maxHistory>
+            <totalSizeCap>1MB</totalSizeCap>
+        </rollingPolicy>
+
+    </appender>
+
+    <logger name="com.zaxxer.hikari" level="ALL" additivity="false">
+        <appender-ref ref="HIKARI" />
     </logger>
 
     <springProfile name="dev">
