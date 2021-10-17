@@ -33,6 +33,7 @@
 
     <logger name="com.zaxxer.hikari" level="ALL" additivity="false">
         <appender-ref ref="HIKARI" />
+        <appender-ref ref="ConsoleAppender" />
     </logger>
 
     <springProfile name="dev">
