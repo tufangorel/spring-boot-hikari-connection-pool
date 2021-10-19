@@ -43,7 +43,17 @@ public class HikariCPStatisticsBackgroundThread implements Runnable {
             try {
                 Thread.sleep(10000);
             } catch (InterruptedException e) {
+
                 logger.error("ERROR in Hikari Connection Pool status monitor");
+                while (poolProxy.getActiveConnections() > 0 ) {
+                    poolProxy.softEvictConnections();
+                    // sleep a little
+                    try {
+                        Thread.sleep(10000);
+                    } catch (InterruptedException ex) {
+                        logger.error("ERROR in Hikari Connection softEvictConnections : "+ex.getMessage());
+                    }
+                }
             }
         }
 
