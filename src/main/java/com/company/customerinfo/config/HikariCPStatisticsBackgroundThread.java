@@ -12,15 +12,14 @@ import java.lang.management.ManagementFactory;
 
 public class HikariCPStatisticsBackgroundThread implements Runnable {
 
-    public static final Logger logger = LoggerFactory.getLogger(HikariCPStatisticsBackgroundThread.class);
+    private static final Logger logger = LoggerFactory.getLogger(HikariCPStatisticsBackgroundThread.class);
 
-    private static HikariPoolMXBean poolProxy;
+    private HikariPoolMXBean poolProxy;
 
     public HikariCPStatisticsBackgroundThread( String hikariConnectionPoolName ) {
 
-        MBeanServer mBeanServer = ManagementFactory.getPlatformMBeanServer();
         try {
-            mBeanServer = ManagementFactory.getPlatformMBeanServer();
+            MBeanServer mBeanServer = ManagementFactory.getPlatformMBeanServer();
             ObjectName poolAccessor = new ObjectName("com.zaxxer.hikari:type=Pool (" + hikariConnectionPoolName + ")");
             poolProxy = JMX.newMXBeanProxy(mBeanServer, poolAccessor, HikariPoolMXBean.class);
             logger.debug("HikariPoolMXBean created!");
