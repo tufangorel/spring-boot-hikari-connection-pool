@@ -43,24 +43,32 @@ public class TomcatShutdownContextClosedEventConfig implements TomcatConnectorCu
     public void onApplicationEvent(ContextClosedEvent event) {
         LOGGER.info("Embedded Tomcat stopped accepting new requests");
 
-        connector.setProperty("maxThreads", "0");
-        connector.setProperty("acceptCount", "0");
-        executor.setWaitForTasksToCompleteOnShutdown(true);
+        if( executor != null )
+            executor.setWaitForTasksToCompleteOnShutdown(true);
+        else
+            LOGGER.info("ThreadPoolTaskExecutor is null!");
 
         LOGGER.info("Starting shutdown process");
-        Executor executor = connector.getProtocolHandler().getExecutor();
-        if (executor instanceof ThreadPoolExecutor) {
-            try {
-                ThreadPoolExecutor threadPoolExecutor = (ThreadPoolExecutor) executor;
-                threadPoolExecutor.shutdown();
-                while (!threadPoolExecutor.awaitTermination(shutdownProperties.getTimeout(), MILLISECONDS)) {
-                    LOGGER.info("Waiting termination of threads...");
+        if( connector != null ) {
+
+            connector.setProperty("maxThreads", "0");
+            connector.setProperty("acceptCount", "0");
+
+            Executor executor = connector.getProtocolHandler().getExecutor();
+            if (executor instanceof ThreadPoolExecutor) {
+                try {
+                    ThreadPoolExecutor threadPoolExecutor = (ThreadPoolExecutor) executor;
+                    threadPoolExecutor.shutdown();
+                    while (!threadPoolExecutor.awaitTermination(shutdownProperties.getTimeout(), MILLISECONDS)) {
+                        LOGGER.info("Waiting termination of threads...");
+                    }
+                } catch (InterruptedException ex) {
+                    LOGGER.info("Tomcat termination error!", ex);
+                    Thread.currentThread().interrupt();
                 }
-            } catch (InterruptedException ex) {
-                LOGGER.info("Tomcat termination error!", ex);
-                Thread.currentThread().interrupt();
             }
-            LOGGER.info("Shutdown process is completed successfully");
         }
+
+        LOGGER.info("Shutdown process completed successfully");
     }
 }
