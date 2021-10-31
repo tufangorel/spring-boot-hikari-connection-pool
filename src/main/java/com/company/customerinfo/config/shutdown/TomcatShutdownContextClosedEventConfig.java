@@ -13,6 +13,7 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.stereotype.Component;
 
 import java.util.concurrent.Executor;
+import java.util.concurrent.TimeUnit;
 
 import static java.util.concurrent.TimeUnit.MILLISECONDS;
 
@@ -41,34 +42,47 @@ public class TomcatShutdownContextClosedEventConfig implements TomcatConnectorCu
 
     @Override
     public void onApplicationEvent(ContextClosedEvent event) {
+
         LOGGER.info("Embedded Tomcat stopped accepting new requests");
+        LOGGER.info("Shutdown process initiated...");
+        try {
+            Thread.sleep(TimeUnit.MINUTES.toMillis((long) 0.5));  // Wait for 30 seconds before context close.
 
-        if( executor != null )
-            executor.setWaitForTasksToCompleteOnShutdown(true);
-        else
-            LOGGER.info("ThreadPoolTaskExecutor is null!");
+            if( executor != null )
+                executor.setWaitForTasksToCompleteOnShutdown(true);
+            else
+                LOGGER.info("ThreadPoolTaskExecutor is null!");
 
-        LOGGER.info("Starting shutdown process");
-        if( connector != null ) {
+            LOGGER.info("Starting shutdown process");
+            if( connector != null ) {
 
-            connector.setProperty("maxThreads", "0");
-            connector.setProperty("acceptCount", "0");
+                LOGGER.info("Embedded Tomcat maxThreads before shutdown : "+connector.getProperty("maxThreads") );
+                LOGGER.info("Embedded Tomcat acceptCount before shutdown : "+connector.getProperty("acceptCount") );
+                connector.setProperty("maxThreads", "0");
+                connector.setProperty("acceptCount", "0");
 
-            Executor executor = connector.getProtocolHandler().getExecutor();
-            if (executor instanceof ThreadPoolExecutor) {
-                try {
-                    ThreadPoolExecutor threadPoolExecutor = (ThreadPoolExecutor) executor;
-                    threadPoolExecutor.shutdown();
-                    while (!threadPoolExecutor.awaitTermination(shutdownProperties.getTimeout(), MILLISECONDS)) {
-                        LOGGER.info("Waiting termination of threads...");
+                Executor executor = connector.getProtocolHandler().getExecutor();
+                if (executor instanceof ThreadPoolExecutor) {
+                    try {
+                        ThreadPoolExecutor threadPoolExecutor = (ThreadPoolExecutor) executor;
+                        threadPoolExecutor.shutdown();
+                        while (!threadPoolExecutor.awaitTermination(shutdownProperties.getTimeout(), MILLISECONDS)) {
+                            LOGGER.info("Waiting termination of threads...");
+                        }
+                        LOGGER.info("Shutdown process completed successfully");
+                    } catch (InterruptedException ex) {
+                        LOGGER.info("Tomcat termination error!", ex);
+                        Thread.currentThread().interrupt();
                     }
-                    LOGGER.info("Shutdown process completed successfully");
-                } catch (InterruptedException ex) {
-                    LOGGER.info("Tomcat termination error!", ex);
-                    Thread.currentThread().interrupt();
                 }
             }
+            else {
+                LOGGER.info("TomcatConnectorCustomizer is null!");
+            }
+        } catch (InterruptedException e) {
+            LOGGER.error("Exception is thrown during the ContextClosedEvent", e);
         }
+        LOGGER.info("Graceful Shutdown is processed successfully");
     }
 
 }
