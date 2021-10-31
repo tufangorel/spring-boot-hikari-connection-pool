@@ -1,5 +1,6 @@
-package com.company.customerinfo.config;
+package com.company.customerinfo.config.listener;
 
+import com.company.customerinfo.config.DBHealthCheckConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,9 +12,9 @@ import org.springframework.stereotype.Component;
 
 
 @Component
-public class StartupApplicationListener implements ApplicationListener<ApplicationReadyEvent> {
+public class ApplicationReadyEventListener implements ApplicationListener<ApplicationReadyEvent> {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(StartupApplicationListener.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(ApplicationReadyEventListener.class);
 
     @Autowired
     private DBHealthCheckConfig dbHealthCheckConfig;

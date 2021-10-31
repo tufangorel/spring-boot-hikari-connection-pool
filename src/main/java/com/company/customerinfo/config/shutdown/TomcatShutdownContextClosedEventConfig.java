@@ -62,13 +62,13 @@ public class TomcatShutdownContextClosedEventConfig implements TomcatConnectorCu
                     while (!threadPoolExecutor.awaitTermination(shutdownProperties.getTimeout(), MILLISECONDS)) {
                         LOGGER.info("Waiting termination of threads...");
                     }
+                    LOGGER.info("Shutdown process completed successfully");
                 } catch (InterruptedException ex) {
                     LOGGER.info("Tomcat termination error!", ex);
                     Thread.currentThread().interrupt();
                 }
             }
         }
-
-        LOGGER.info("Shutdown process completed successfully");
     }
+
 }
