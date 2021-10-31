@@ -15,7 +15,6 @@ public class CustomerInfoApplication {
 	public static void main(String[] args) {
 
 		new SpringApplicationBuilder(CustomerInfoApplication.class)
-				.listeners(new ApplicationFailedEventListener())
 				.run(args);
 
 		LOGGER.info("Spring Boot application started!");
