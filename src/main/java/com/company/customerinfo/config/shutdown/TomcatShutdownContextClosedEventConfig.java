@@ -46,7 +46,7 @@ public class TomcatShutdownContextClosedEventConfig implements TomcatConnectorCu
         LOGGER.info("Embedded Tomcat stopped accepting new requests");
         LOGGER.info("Shutdown process initiated...");
         try {
-            Thread.sleep(TimeUnit.MINUTES.toMillis((long) 0.5));  // Wait for 30 seconds before context close.
+            Thread.sleep(TimeUnit.MINUTES.toMillis((long) 1));  // Wait for 60 seconds before context close.
 
             if( executor != null )
                 executor.setWaitForTasksToCompleteOnShutdown(true);
