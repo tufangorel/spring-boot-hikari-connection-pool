@@ -1,6 +1,7 @@
 package com.company.customerinfo.config;
 
 
+import com.codahale.metrics.MetricRegistry;
 import com.zaxxer.hikari.HikariDataSource;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
@@ -31,8 +32,12 @@ public class CustomHikariDataSourceConfig {
     @Bean(name = "customHikariDataSource")
     @ConfigurationProperties(prefix = "spring.datasource")
     public HikariDataSource customHikariDataSource(DataSourceProperties properties) {
-        return properties.initializeDataSourceBuilder().type(HikariDataSource.class)
+
+        MetricRegistry metricRegistry = new MetricRegistry();
+        HikariDataSource hikariDataSource = properties.initializeDataSourceBuilder().type(HikariDataSource.class)
                 .build();
+        hikariDataSource.setMetricRegistry(metricRegistry);
+        return hikariDataSource;
     }
 
     @Primary
