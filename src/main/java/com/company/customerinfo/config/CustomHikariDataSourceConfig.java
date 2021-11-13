@@ -29,9 +29,9 @@ import javax.sql.DataSource;
 public class CustomHikariDataSourceConfig {
 
     @Primary
-    @Bean(name = "customHikariDataSource")
+    @Bean(name = "customHikariDataSource", destroyMethod = "close")
     @ConfigurationProperties(prefix = "spring.datasource")
-    public HikariDataSource customHikariDataSource(DataSourceProperties properties) {
+    public DataSource customHikariDataSource(DataSourceProperties properties) {
 
         MetricRegistry metricRegistry = new MetricRegistry();
         HikariDataSource hikariDataSource = properties.initializeDataSourceBuilder().type(HikariDataSource.class)
@@ -56,8 +56,12 @@ public class CustomHikariDataSourceConfig {
     @Primary
     @Bean(name = "customTransactionManager")
     public PlatformTransactionManager customTransactionManager (
-            @Qualifier("customEntityManagerFactory")EntityManagerFactory customEntityManagerFactory){
-        return new JpaTransactionManager(customEntityManagerFactory);
+            @Qualifier("customEntityManagerFactory")EntityManagerFactory customEntityManagerFactory,
+            @Qualifier("customHikariDataSource") DataSource customHikariDataSource){
+
+        JpaTransactionManager jpaTransactionManager = new JpaTransactionManager(customEntityManagerFactory);
+        jpaTransactionManager.setDataSource(customHikariDataSource);
+        return jpaTransactionManager;
     }
 
 }
