@@ -70,9 +70,11 @@ Request Body : <br/>
     "name": "name1", <br/>
     "age": 1, <br/>
     "shippingAddress": { <br/>
-        "streetName": "software", <br/>
-        "city": "ankara", <br/>
-        "country": "TR" <br/>
+        "address": { <br/>
+            "streetName": "software", <br/>
+            "city": "ankara", <br/>
+            "country": "TR" <br/>
+        } <br/>
     } <br/>
 } <br/>
 
@@ -84,9 +86,11 @@ curl --location --request POST 'localhost:8080/customer-info/customer/save' \
     "name": "name1",
     "age": 1,
     "shippingAddress": {
-        "streetName": "software",
-        "city": "ankara",
-        "country": "TR"
+        "address": {
+            "streetName": "software",
+            "city": "ankara",
+            "country": "TR"
+        }
     }
 }'
 </pre><br/>
@@ -101,9 +105,12 @@ HTTP response code 200 <br/>
     "age": 1,
     "shippingAddress": {
         "id": 1,
-        "streetName": "software",
-        "city": "ankara",
-        "country": "TR"
+        "address": {
+            "id": 1,
+            "streetName": "software",
+            "city": "ankara",
+            "country": "TR"
+        }
     }
 }
 </pre>
@@ -134,9 +141,12 @@ HTTP response code 200 <br/>
         "age": 1,
         "shippingAddress": {
             "id": 1,
-            "streetName": "software",
-            "city": "ankara",
-            "country": "TR"
+            "address": {
+                "id": 1,
+                "streetName": "software",
+                "city": "ankara",
+                "country": "TR"
+            }
         }
     }
 ]
