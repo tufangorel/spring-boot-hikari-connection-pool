@@ -34,6 +34,7 @@ public class DBHealthCheckConfig {
             Statement stmt = connection.createStatement();
             ResultSet rs = stmt.executeQuery(QUERY);
             rs.close();
+            stmt.close();
         } catch (SQLException sqlException) {
             return Health.down().build();
         } finally {
