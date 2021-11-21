@@ -70,11 +70,11 @@ Request Body : <br/>
 &ensp;    "name": "name1", <br/>
 &ensp;    "age": 1, <br/>
 &ensp;    "shippingAddress": { <br/>
-&ensp;        "address": { <br/>
-&ensp;            "streetName": "software", <br/>
-&ensp;            "city": "ankara", <br/>
-&ensp;            "country": "TR" <br/>
-&ensp;        } <br/>
+&emsp;        "address": { <br/>
+&emsp;            "streetName": "software", <br/>
+&emsp;            "city": "ankara", <br/>
+&emsp;            "country": "TR" <br/>
+&emsp;        } <br/>
 &ensp;    } <br/>
 } <br/>
 
