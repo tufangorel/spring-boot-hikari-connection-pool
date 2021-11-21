@@ -72,7 +72,27 @@ public class Customer implements Serializable {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", age=" + age +
-                ", shippingAddress=" + shippingAddress +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Customer customer = (Customer) o;
+
+        if (!id.equals(customer.id)) return false;
+        if (!name.equals(customer.name)) return false;
+        if (!age.equals(customer.age)) return false;
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id.hashCode();
+        result = 31 * result + name.hashCode();
+        result = 31 * result + age.hashCode();
+        return result;
     }
 }

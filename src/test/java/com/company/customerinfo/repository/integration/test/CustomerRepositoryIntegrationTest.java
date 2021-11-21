@@ -1,5 +1,6 @@
 package com.company.customerinfo.repository.integration.test;
 
+import com.company.customerinfo.model.Address;
 import com.company.customerinfo.model.Customer;
 import com.company.customerinfo.model.ShippingAddress;
 import com.company.customerinfo.repository.CustomerRepository;
@@ -24,12 +25,16 @@ public class CustomerRepositoryIntegrationTest {
         customer.setAge(1);
 
         ShippingAddress shippingAddress = new ShippingAddress();
-        shippingAddress.setCountry("TR");
-        shippingAddress.setCity("Ankara");
-        shippingAddress.setStreetName("KaleSokak");
+        Address address = new Address();
+        address.setCountry("TR");
+        address.setCity("Ankara");
+        address.setStreetName("KaleSokak");
+        shippingAddress.setAddress(address);
         customer.setShippingAddress(shippingAddress);
+
         Customer savedCustomer = customerRepository.save(customer);
         assertThat(savedCustomer).isEqualTo(customer);
     }
+
 
 }

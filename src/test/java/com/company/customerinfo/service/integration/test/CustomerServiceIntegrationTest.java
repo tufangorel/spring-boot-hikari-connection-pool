@@ -2,10 +2,7 @@ package com.company.customerinfo.service.integration.test;
 
 
 import com.company.customerinfo.CustomerInfoApplication;
-import com.company.customerinfo.model.Customer;
-import com.company.customerinfo.model.CustomerOrder;
-import com.company.customerinfo.model.OrderItem;
-import com.company.customerinfo.model.ShippingAddress;
+import com.company.customerinfo.model.*;
 import com.company.customerinfo.service.CustomerService;
 import com.company.customerinfo.service.ShippingAddressService;
 import org.junit.jupiter.api.Order;
@@ -41,9 +38,11 @@ public class CustomerServiceIntegrationTest {
         customer.setAge(1);
 
         ShippingAddress shippingAddress = new ShippingAddress();
-        shippingAddress.setCountry("TR");
-        shippingAddress.setCity("Ankara");
-        shippingAddress.setStreetName("KaleSokak");
+        Address address = new Address();
+        address.setCountry("TR");
+        address.setCity("Ankara");
+        address.setStreetName("KaleSokak");
+        shippingAddress.setAddress(address);
         customer.setShippingAddress(shippingAddress);
 
         Customer savedRecord = customerService.save(customer);
@@ -68,9 +67,11 @@ public class CustomerServiceIntegrationTest {
         customer.setAge(1);
 
         ShippingAddress shippingAddress = new ShippingAddress();
-        shippingAddress.setCountry("TR");
-        shippingAddress.setCity("Ankara");
-        shippingAddress.setStreetName("KaleSokak");
+        Address address = new Address();
+        address.setCountry("TR");
+        address.setCity("Ankara");
+        address.setStreetName("KaleSokak");
+        shippingAddress.setAddress(address);
         customer.setShippingAddress(shippingAddress);
 
         CustomerOrder customerOrder = new CustomerOrder();

@@ -2,10 +2,12 @@ package com.company.customerinfo.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Objects;
 
 
 @Entity
@@ -19,15 +21,18 @@ public class ShippingAddress implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    private String streetName;
-
-    private String city;
-
-    private String country;
-
     @JsonBackReference
     @OneToOne(mappedBy = "shippingAddress")
     private Customer customer;
+
+    @JsonManagedReference
+    @JoinColumn(name = "fk_address_id")
+    @OneToOne(cascade=CascadeType.ALL)
+    private Address address;
+
+    public Address getAddress() {
+        return address;
+    }
 
     public Integer getId() {
         return id;
@@ -35,30 +40,6 @@ public class ShippingAddress implements Serializable {
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public String getStreetName() {
-        return streetName;
-    }
-
-    public void setStreetName(String streetName) {
-        this.streetName = streetName;
-    }
-
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-    public String getCountry() {
-        return country;
-    }
-
-    public void setCountry(String country) {
-        this.country = country;
     }
 
     public Customer getCustomer() {
@@ -69,13 +50,28 @@ public class ShippingAddress implements Serializable {
         this.customer = customer;
     }
 
+    public void setAddress(Address address) {
+        this.address = address;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ShippingAddress that = (ShippingAddress) o;
+        return id.equals(that.id) && customer.equals(that.customer) && address.equals(that.address);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, customer, address);
+    }
+
     @Override
     public String toString() {
         return "ShippingAddress{" +
                 "id=" + id +
-                ", streetName='" + streetName + '\'' +
-                ", city='" + city + '\'' +
-                ", country='" + country + '\'' +
+                ", address=" + address +
                 '}';
     }
 }
