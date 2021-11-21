@@ -66,17 +66,17 @@ $ docker run -p 8080:8080 -e "SPRING_PROFILES_ACTIVE=dev" demo:latest <br/>
 Method : HTTP.POST <br/>
 URL : localhost:8080/customer-info/customer/save <br/>
 Request Body : <br/>
-{
-    "name": "name1",
-    "age": 1,
-    "shippingAddress": {
-        "address": {
-            "streetName": "software",
-            "city": "ankara",
-            "country": "TR"
-        }
-    }
-}
+{ <br/>
+&ensp;    "name": "name1", <br/>
+&ensp;    "age": 1, <br/>
+&ensp;    "shippingAddress": { <br/>
+&ensp;        "address": { <br/>
+&ensp;            "streetName": "software", <br/>
+&ensp;            "city": "ankara", <br/>
+&ensp;            "country": "TR" <br/>
+&ensp;        } <br/>
+&ensp;    } <br/>
+} <br/>
 
 Curl Request : <br/>
 <pre>
