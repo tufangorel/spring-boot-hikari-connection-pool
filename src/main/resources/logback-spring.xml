@@ -10,7 +10,7 @@
               class="ch.qos.logback.core.ConsoleAppender">
         <layout class="ch.qos.logback.classic.PatternLayout">
                 <pattern>
-                    %date{ISO8601} %highlight(%-5level) %magenta(%thread) %cyan(%logger): %message %X{X-B3-TraceId} %X{X-B3-SpanId} %n%throwable
+                    %date{ISO8601} %highlight(%-5level) %magenta(%thread) %cyan(%logger.%M): %message %X{X-B3-TraceId} %X{X-B3-SpanId} %n%throwable
                 </pattern>
         </layout>
     </appender>
